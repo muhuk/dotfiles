@@ -9,8 +9,8 @@ QUIET_PERIOD=$2
 cd $WORK_DIR
 
 flashbake -q . $QUIET_PERIOD
-git fetch
-git rebase
+git fetch -q
+git rebase -q
 git push -q
 
 cd $CURR_DIR
