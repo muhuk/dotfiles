@@ -21,11 +21,13 @@ cd $WORK_DIR
 
 flashbake -q . $QUIET_PERIOD
 
+sleep $[ ( $RANDOM % 5 ) ]s
+git fetch -q
+
 if [[ $(git log --oneline HEAD..FETCH_HEAD) ]]; then
-    sleep $[ ( $RANDOM % 5 ) ]s
-    git fetch -q
     git rebase -q
 fi
+
 if [[ $(git log --oneline FETCH_HEAD..HEAD) ]]; then
     git push -q
 fi
