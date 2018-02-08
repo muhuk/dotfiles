@@ -18,15 +18,18 @@ CURR_DIR=$(pwd)
 QUIET_PERIOD=$2
 
 # Bastardized from https://stackoverflow.com/q/929368/42188
+#
+# Figured out how bash functions work here:
+# https://ryanstutorials.net/bash-scripting-tutorial/bash-functions.php
 function am_i_online() {
-    rc=0
+    local rc=0
     for interface in $(ls /sys/class/net/ | grep -v lo);
     do
     	if [[ $(cat /sys/class/net/$interface/carrier 2> /dev/null) = 1 ]]; then
-    	    rc=1;
+    	    rc=1
     	fi
     done
-    return $rc;
+    echo $rc
 }
 
 
@@ -34,8 +37,8 @@ cd $WORK_DIR
 
 flashbake -q . $QUIET_PERIOD
 
-am_i_online
-if [ "$?" -eq 1 ]; then
+ONLINE=$(am_i_online)
+if [ $ONLINE -eq 1 ]; then
     git fetch -q
     if [[ $(git log --oneline HEAD..FETCH_HEAD) ]]; then
 	git rebase -q
@@ -44,7 +47,7 @@ if [ "$?" -eq 1 ]; then
 	git push -q
     fi
 else
-    echo "no Internet connection!"
+    echo "No Internet connection, skipping sync."
 fi
     
 cd $CURR_DIR
