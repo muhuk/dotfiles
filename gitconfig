@@ -1,0 +1,10 @@
+[color]
+	ui = true
+[user]
+	name = Atamert Ölçgen
+	email = muhuk@muhuk.com
+[merge]
+        ff = only
+	tool = meld
+[push]
+	default = simple
