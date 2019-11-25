@@ -109,6 +109,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export EDITOR="emacsclient -nw"
+export VISUAL=$EDITOR
+
 export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
 
 # set PATH so it includes user's private bin if it exists
