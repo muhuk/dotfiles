@@ -118,5 +118,3 @@ export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-
-export WORKON_HOME=$HOME/code
