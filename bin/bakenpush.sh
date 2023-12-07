@@ -35,7 +35,7 @@ function am_i_online() {
 
 cd $WORK_DIR
 
-flashbake -q . $QUIET_PERIOD
+$HOME/bin/flashbake -q . $QUIET_PERIOD
 
 ONLINE=$(am_i_online)
 if [ $ONLINE -eq 1 ]; then
